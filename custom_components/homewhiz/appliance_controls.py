@@ -205,10 +205,16 @@ class SwingAxisControl(Control):
         if current_value == value:
             return []
         selected_option = (
-            self._option_with_suffix("_AUTO")
+            self._option_with_suffix("_ON")
             if value
             else self._option_with_suffix("_OFF")
         )
+        if selected_option is None:
+            selected_option = (
+                self._option_with_suffix("_AUTO")
+                if value
+                else self._option_with_suffix("_OFF")
+            )
         if selected_option is None:
             raise Exception(f"Cannot change swing for axis {self.key}")
         return [self.parent.set_value(selected_option)]
@@ -538,6 +544,8 @@ def build_controls_from_features(
 
 def convert_to_bool_control_if_possible(control: Control) -> Control:
     if not isinstance(control, WriteEnumControl):
+        return control
+    if control.key == "AIR_CONDITIONER_UP_DOWN_VANE_CONTROL":
         return control
     options = control.options.inverse
     option_keys = list(options.keys())

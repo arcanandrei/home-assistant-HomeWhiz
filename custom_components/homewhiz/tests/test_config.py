@@ -29,6 +29,7 @@ file_names = [
     "oven-pirolitik.json",
     # configs fetched from the api
     "example_washing_machine_config.json",
+    "beko_ac.json",
     "example_ac_config.json",
     "example_ac_advanced_config.json",
     "example_oven_config.json",

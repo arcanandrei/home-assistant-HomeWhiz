@@ -39,7 +39,7 @@ data_auto = bytearray(
 @pytest.fixture
 def config() -> ApplianceConfiguration:
     dirname = os.path.dirname(__file__)
-    file_path = os.path.join(dirname, "fixtures/example_ac_config.json")
+    file_path = os.path.join(dirname, "fixtures/beko_ac.json")
     with open(file_path) as file:
         json_content = json.load(file)
         return from_dict(ApplianceConfiguration, json_content)
@@ -52,6 +52,7 @@ def test_off(config: ApplianceConfiguration) -> None:
     test_case.assertDictEqual(
         values,
         {
+            "AIR_CONDITIONER_UP_DOWN_VANE_CONTROL" : "UP_DOWN_VANE_CONTROL_OFF",
             "AC": {
                 "AIR_CONDITIONER_TARGET_TEMPERATURE": 26,
                 "AIR_CONDITIONER_ROOM_TEMPERATURE": 28,
@@ -70,6 +71,7 @@ def test_mode_auto(config: ApplianceConfiguration) -> None:
     test_case.assertDictEqual(
         values,
         {
+            "AIR_CONDITIONER_UP_DOWN_VANE_CONTROL" : "UP_DOWN_VANE_CONTROL_OFF",
             "AC": {
                 "AIR_CONDITIONER_TARGET_TEMPERATURE": 23,
                 "AIR_CONDITIONER_ROOM_TEMPERATURE": 26,
